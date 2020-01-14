@@ -7,11 +7,17 @@ var env = require('dotenv').config();
 var app = express();
 
 // setting bodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ 
+    extended: true 
+}));
 app.use(bodyParser.json());
 
 // setting passport
-app.use(session({secret:"BakoelGame2020", resave: true, saveUninitialized: true})); // session secret
+app.use(session({
+    secret:"BakoelGame2020", 
+    resave: true, 
+    saveUninitialized: true
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
@@ -29,20 +35,19 @@ app.get('/', function(req, res){
 });
 
 //Routes
-var authRoute = require('./app/routes/auth.js')(app);
+var authRoute = require('./app/routes/auth.js')(app, passport);
 
 //Models
 var models = require("./app/models");
+
+//load passport strategies
+require('./app/config/passport/passport.js')(passport, models.user);
  
 //Sync Database
 models.sequelize.sync().then(function() {
- 
-    console.log('Nice! Database looks fine')
- 
+    console.log('Nice! Database looks fine');
 }).catch(function(err) {
- 
-    console.log(err, "Something went wrong with the Database Update!")
- 
+    console.log(err, "Something went wrong with the Database Update!");
 });
 
 app.listen(8080, function(err){
