@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="bundle.css">
+</head>
+ 
+<body>
+    <div class="header_top_menu">
+        Header Top Menu
+    </div>
+
+    <div class="header_wrapper" id="fixed_header">
+        Header Wrapper tempatnya logo dan menu
+    </div>
+
+    <br><%= message %>
+    <form id="signup" name="signup" method="post" action="/signup">
+        <label for="email">Email Address</label>
+        <input class="text" name="email" type="email" /><br>
+        <label for="firstname">Firstname</label>
+        <input name="firstname" type="text" /><br>
+        <label for="lastname">Lastname</label>
+        <input name="lastname" type="text" /><br>
+        <label for="password">Password</label>
+        <input name="password" type="password" /><br><br>
+        <input class="btn" type="submit" value="Sign Up" />
+    </form>
+
+</body>
+ 
+</html>

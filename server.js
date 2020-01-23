@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var path = require('path'); 
 var exphbs = require('express-handlebars');
 var env = require('dotenv').config();
 var app = express();
@@ -22,13 +23,15 @@ app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
 //For Handlebars
-app.set('views', './app/views');
+/*app.set('views', './app/views');
 app.engine('hbs', exphbs({
     extname: '.hbs',
     defaultLayout: false,
     layoutsDir: "views/layouts/"
 }));
-app.set('view engine', '.hbs');
+app.set('view engine', '.hbs');*/
+app.set('views', path.join(__dirname, '../bg2020/app/views'))
+app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
     res.send('Welcome to Passport with Sequelize');
